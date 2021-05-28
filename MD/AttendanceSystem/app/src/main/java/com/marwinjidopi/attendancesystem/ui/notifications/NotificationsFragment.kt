@@ -1,4 +1,4 @@
-package com.marwinjidopi.attendancesystem.ui.profile
+package com.marwinjidopi.attendancesystem.ui.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,11 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.marwinjidopi.attendancesystem.R
 import com.marwinjidopi.attendancesystem.databinding.FragmentNotificationsBinding
 
-class ProfileFragment : Fragment() {
+class NotificationsFragment : Fragment() {
 
-    private lateinit var profileViewModel: ProfileViewModel
+    private lateinit var notificationsViewModel: NotificationsViewModel
     private var _binding: FragmentNotificationsBinding? = null
 
     // This property is only valid between onCreateView and
@@ -24,14 +25,14 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
+        notificationsViewModel =
+            ViewModelProvider(this).get(NotificationsViewModel::class.java)
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        profileViewModel.text.observe(viewLifecycleOwner, Observer {
+        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

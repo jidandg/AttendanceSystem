@@ -2,13 +2,13 @@
     <string name="app_name">Attendance System</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_profile">Profile</string>
+    <string name="title_notifications">Notifications</string>
     <string name="email">Email</string>
     <string name="welcome">Welcome</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="login">Login</string>
-    <string name="don_t_have_account_register_here">Don't have account ? Register Here</string>
+    <string name="don_t_have_account_register_here">Don\'t have account ? Register Here</string>
     <string name="register">Register</string>
     <string name="sign_up">Sign Up</string>
     <string name="already_have_account_login_here">Already have account ? Login Here</string>
