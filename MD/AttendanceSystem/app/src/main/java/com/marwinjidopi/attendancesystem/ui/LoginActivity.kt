@@ -42,7 +42,6 @@ class LoginActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
                 else -> {
-                    binding.btnLogin.visibility = View.INVISIBLE
                     mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
