@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "532136023104",
+    "project_id": "attendance-system-9f194",
+    "storage_bucket": "attendance-system-9f194.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532136023104:android:e17dce126920eecf1efba5",
+        "android_client_info": {
+          "package_name": "com.marwinjidopi.attendancesystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "532136023104-4ikndjhh71n57j28s5qntvl85fs4m646.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBz6Xnh9FrV-a4lcl0vKEWg1yCErqf_8VE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "532136023104-4ikndjhh71n57j28s5qntvl85fs4m646.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
