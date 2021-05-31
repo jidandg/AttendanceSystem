@@ -12,37 +12,37 @@ import com.marwinjidopi.attendancesystem.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var registerBinding: ActivityRegisterBinding
+    private lateinit var binding: ActivityRegisterBinding
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        registerBinding = ActivityRegisterBinding.inflate(layoutInflater)
-        setContentView(registerBinding.root)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         mAuth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
 
-        registerBinding.btnSignUp.setOnClickListener {
-            val username = registerBinding.etUsername.text.toString().trim()
-            val email = registerBinding.etEmail.text.toString().trim()
-            val password = registerBinding.etPassword.text.toString().trim()
+        binding.btnSignUp.setOnClickListener {
+            val username = binding.etUsername.text.toString().trim()
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
 
             when {
                 email.isEmpty() -> {
-                    registerBinding.etEmail.error = "This field is required"
-                    registerBinding.etEmail.requestFocus()
+                    binding.etEmail.error = "This field is required"
+                    binding.etEmail.requestFocus()
                     return@setOnClickListener
                 }
                 password.isEmpty() -> {
-                    registerBinding.etPassword.error = "This field is required"
-                    registerBinding.etPassword.requestFocus()
+                    binding.etPassword.error = "This field is required"
+                    binding.etPassword.requestFocus()
                     return@setOnClickListener
                 }
                 password.length < 6 -> {
-                    registerBinding.etPassword.error = "Password at least 6 character"
-                    registerBinding.etPassword.requestFocus()
+                    binding.etPassword.error = "Password at least 6 character"
+                    binding.etPassword.requestFocus()
                     return@setOnClickListener
                 }
                 else -> {
@@ -75,7 +75,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
         }
-        registerBinding.tvLogin.setOnClickListener {
+        binding.tvLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }

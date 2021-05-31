@@ -3,48 +3,46 @@ package com.marwinjidopi.attendancesystem.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.marwinjidopi.attendancesystem.MainActivity
-import com.marwinjidopi.attendancesystem.data.User
 import com.marwinjidopi.attendancesystem.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var activityBinding: ActivityLoginBinding
+    private lateinit var binding: ActivityLoginBinding
     private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityBinding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(activityBinding.root)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         mAuth = FirebaseAuth.getInstance()
 
-        activityBinding.btnLogin.setOnClickListener {
-            val email = activityBinding.etEmail.text.toString().trim()
-            val password = activityBinding.etPassword.text.toString().trim()
+        binding.btnLogin.setOnClickListener {
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
 
             when {
                 email.isEmpty() -> {
-                    activityBinding.etEmail.error = "This field is required"
-                    activityBinding.etEmail.requestFocus()
+                    binding.etEmail.error = "This field is required"
+                    binding.etEmail.requestFocus()
                     return@setOnClickListener
                 }
                 password.isEmpty() -> {
-                    activityBinding.etPassword.error = "This field is required"
-                    activityBinding.etPassword.requestFocus()
+                    binding.etPassword.error = "This field is required"
+                    binding.etPassword.requestFocus()
                     return@setOnClickListener
                 }
                 password.length < 6 -> {
-                    activityBinding.etPassword.error = "Password at least 6 character"
-                    activityBinding.etPassword.requestFocus()
+                    binding.etPassword.error = "Password at least 6 character"
+                    binding.etPassword.requestFocus()
                     return@setOnClickListener
                 }
                 else -> {
-                    activityBinding.btnLogin.visibility = View.INVISIBLE
+                    binding.btnLogin.visibility = View.INVISIBLE
                     mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
@@ -53,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
                                 startActivity(Intent(this, MainActivity::class.java))
                                 finishAffinity()
                             } else {
-                                activityBinding.btnLogin.visibility = View.VISIBLE
+                                binding.btnLogin.visibility = View.VISIBLE
                                 Toast.makeText(
                                     this,
                                     "Your E-Mail or Password are Wrong!",
@@ -65,7 +63,11 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
-        activityBinding.tvLogin.setOnClickListener {
+        binding.tvForgotPassword.setOnClickListener {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(intent)
+        }
+        binding.tvLogin.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
