@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.notifications.NotificationsFragment">
 
-    <RelativeLayout
-        android:id="@+id/rellay1"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black"
         android:paddingBottom="20dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
@@ -21,46 +21,198 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/circle_border">
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_circle_border"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/fotoProfil"
+                android:id="@+id/imgProfile"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_margin="9dp"
                 android:adjustViewBounds="true"
-                android:background="@drawable/circle"
+                android:background="@drawable/ic_circle"
                 android:padding="3dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_person_fill" />
-
         </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imgUser"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15sp"
             android:fontFamily="sans-serif-light"
             android:text="@string/username"
             android:textColor="@color/white"
-            android:textSize="24sp" />
-    </RelativeLayout>
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgUser" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/text_notifications"
-        android:layout_width="match_parent"
+        android:id="@+id/tvName"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Name"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tvNamePreview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="%1s"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvName"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/email"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tvEmailPreview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvNamePreview"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="%1s"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tvPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/password"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tvChangePassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/change_password"
+        android:textColor="@color/blue"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tvNIM"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/nim"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tvNIMPreview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvChangePassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="%1s"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tvSemester"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvNIM"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/password"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tvSemesterPreview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvNIMPreview"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="%1s"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tvFaculty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvSemester"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/Faculty"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tvFacultyPreview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvSemesterPreview"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="%1s"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tvMajor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvFaculty"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/Major"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tvMajorPreview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvFacultyPreview"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="%1s"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

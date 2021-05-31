@@ -13,4 +13,8 @@
     <string name="register">Register</string>
     <string name="sign_up">Sign Up</string>
     <string name="already_have_account_login_here">Already have account ? Login Here</string>
+    <string name="nim">NIM</string>
+    <string name="Faculty">Fakultas</string>
+    <string name="Major">Jurusan</string>
+    <string name="change_password"><u>Change Password</u></string>
 </resources>
