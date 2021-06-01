@@ -17,4 +17,7 @@
     <string name="Faculty">Fakultas</string>
     <string name="Major">Jurusan</string>
     <string name="change_password"><u>Change Password</u></string>
+    <string name="semester">Semester</string>
+    <string name="send">Send</string>
+    <string name="full_name">Full Name</string>
 </resources>

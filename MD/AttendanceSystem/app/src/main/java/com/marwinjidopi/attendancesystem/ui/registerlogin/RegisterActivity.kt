@@ -1,4 +1,4 @@
-package com.marwinjidopi.attendancesystem.ui
+package com.marwinjidopi.attendancesystem.ui.registerlogin
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -67,7 +67,7 @@ class RegisterActivity : AppCompatActivity() {
                                     }
                                 Toast.makeText(this, "Register successfully!", Toast.LENGTH_SHORT)
                                     .show()
-                                startActivity(Intent(this, LoginActivity::class.java))
+                                startActivity(Intent(this, RegisterFormActivity::class.java))
                             } else {
                                 Toast.makeText(this, "Register failed!", Toast.LENGTH_SHORT).show()
                             }

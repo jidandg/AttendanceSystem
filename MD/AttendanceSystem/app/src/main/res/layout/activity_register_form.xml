@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.registerlogin.RegisterActivity">
+    tools:context=".ui.registerlogin.RegisterFormActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
-        android:layout_height="380dp"
+        android:layout_height="430dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         app:cardCornerRadius="16dp"
@@ -24,11 +24,11 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tvJudul"
+                android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/register"
+                android:text="Please Fill Your Data"
                 android:textColor="#000"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/etUsername"
+                android:id="@+id/etName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -44,15 +44,15 @@
                 android:layout_marginEnd="16dp"
                 android:drawableStart="@drawable/ic_person"
                 android:drawablePadding="10dp"
-                android:hint="@string/username"
+                android:hint="@string/full_name"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvJudul" />
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
             <EditText
-                android:id="@+id/etEmail"
+                android:id="@+id/etNIM"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -60,14 +60,14 @@
                 android:layout_marginEnd="16dp"
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="10dp"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
+                android:hint="@string/nim"
+                android:inputType="text|number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etUsername" />
+                app:layout_constraintTop_toBottomOf="@+id/etName" />
 
             <EditText
-                android:id="@+id/etPassword"
+                android:id="@+id/etSemester"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -76,40 +76,60 @@
                 android:autofillHints="Password"
                 android:drawableStart="@drawable/ic_key"
                 android:drawablePadding="10dp"
-                android:hint="@string/password"
-                android:inputType="textPassword"
+                android:hint="@string/semester"
+                android:inputType="text|number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+                app:layout_constraintTop_toBottomOf="@+id/etNIM" />
+
+            <EditText
+                android:id="@+id/etFaculty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints="Password"
+                android:drawableStart="@drawable/ic_key"
+                android:drawablePadding="10dp"
+                android:hint="@string/Faculty"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etSemester" />
+
+            <EditText
+                android:id="@+id/etMajor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints="Password"
+                android:drawableStart="@drawable/ic_key"
+                android:drawablePadding="10dp"
+                android:hint="@string/Major"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etFaculty" />
 
             <Button
-                android:id="@+id/btnSignUp"
+                android:id="@+id/btnSend"
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/blue"
-                android:text="@string/sign_up"
+                android:text="@string/send"
                 android:textColor="#FFF"
                 app:cornerRadius="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etPassword"
+                app:layout_constraintTop_toBottomOf="@+id/etMajor"
                 tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/tvLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/already_have_account_login_here"
-                android:textColor="@color/blue"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnSignUp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.marwinjidopi.attendancesystem.ui
+package com.marwinjidopi.attendancesystem.ui.registerlogin
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
