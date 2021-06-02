@@ -94,7 +94,7 @@ class RegisterFormActivity : AppCompatActivity() {
                 }
                 else -> {
                     val user = UserForm(name, nim, semester, faculty, major)
-                    uploadImage(bitmap, "asd")
+                    uploadImage(bitmap, FirebaseAuth.getInstance().currentUser?.uid.toString())
                     database.collection("userdata")
                         .document(FirebaseAuth.getInstance().currentUser?.uid.toString())
                         .set(user)
@@ -121,24 +121,21 @@ class RegisterFormActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        when (requestCode) {
-            REQUEST_IMAGE_CAPTURE -> {
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    val imageBitmap = BitmapFactory.decodeFile(photoFile?.absolutePath)
-                    binding.imgCamera.setImageBitmap(imageBitmap)
-                    bitmap = imageBitmap
-                }
-            }
-            else -> {
-                Toast.makeText(this, "Unrecognized request code", Toast.LENGTH_SHORT).show()
-            }
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            val imageBitmap = BitmapFactory.decodeFile(photoFile?.absolutePath)
+            binding.imgCamera.setImageBitmap(imageBitmap)
+            bitmap = imageBitmap
         }
+        else {
+            Toast.makeText(this, "Unrecognized request code", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)?.also {
-                val photoFile: File? = try {
+                photoFile = try {
                     createImageFile()
                 } catch (ex: IOException) {
                     null
