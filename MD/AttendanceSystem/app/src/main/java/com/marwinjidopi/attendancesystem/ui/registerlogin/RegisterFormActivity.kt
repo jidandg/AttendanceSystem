@@ -44,19 +44,7 @@ class RegisterFormActivity : AppCompatActivity() {
         database = FirebaseFirestore.getInstance()
 
         binding.imgCamera.setOnClickListener {
-
             dispatchTakePictureIntent()
-//            try {
-////                val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-////                if (callCameraIntent.resolveActivity(packageManager) != null) {
-////                    val authorities = "$packageName.fileprovider"
-////                    val imageUri = FileProvider.getUriForFile(this, authorities, imageFile)
-////                    callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-////                    startActivityForResult(callCameraIntent, REQUEST_IMAGE_CAPTURE)
-//                }
-//            } catch (e: IOException) {
-//                Toast.makeText(this, "Could not create file!", Toast.LENGTH_SHORT).show()
-//            }
         }
 
         binding.btnSend.setOnClickListener {
@@ -125,8 +113,7 @@ class RegisterFormActivity : AppCompatActivity() {
             val imageBitmap = BitmapFactory.decodeFile(photoFile?.absolutePath)
             binding.imgCamera.setImageBitmap(imageBitmap)
             bitmap = imageBitmap
-        }
-        else {
+        } else {
             Toast.makeText(this, "Unrecognized request code", Toast.LENGTH_SHORT).show()
         }
 
