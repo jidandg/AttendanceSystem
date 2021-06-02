@@ -49,7 +49,7 @@ class RegisterActivity : AppCompatActivity() {
                     mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
-                                val user = User(username , email, password)
+                                val user = User(username , email)
                                 database.collection("users")
                                     .document(FirebaseAuth.getInstance().currentUser?.uid.toString())
                                     .set(user)
