@@ -1,22 +1,32 @@
 package com.marwinjidopi.attendancesystem.ui.registerlogin
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.marwinjidopi.attendancesystem.data.User
 import com.marwinjidopi.attendancesystem.data.UserForm
-import com.marwinjidopi.attendancesystem.databinding.ActivityRegisterBinding
 import com.marwinjidopi.attendancesystem.databinding.ActivityRegisterFormBinding
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
+@Suppress("DEPRECATION")
 class RegisterFormActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterFormBinding
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
+    val REQUEST_IMAGE_CAPTURE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +37,7 @@ class RegisterFormActivity : AppCompatActivity() {
         database = FirebaseFirestore.getInstance()
 
         binding.btnSend.setOnClickListener {
+            //val img = binding.imgCamera.setImageURI().toString().trim()
             val name = binding.etName.text.toString().trim()
             val nim = binding.etNIM.text.toString().trim()
             val semester = binding.etSemester.text.toString().trim()
@@ -82,5 +93,4 @@ class RegisterFormActivity : AppCompatActivity() {
                 }
             }
         }
-    }
 }
