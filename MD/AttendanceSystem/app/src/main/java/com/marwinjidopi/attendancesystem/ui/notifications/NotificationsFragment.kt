@@ -22,8 +22,9 @@ class NotificationsFragment : Fragment() {
     private lateinit var notificationsViewModel: NotificationsViewModel
     private var _binding: FragmentNotificationsBinding? = null
     private lateinit var database: FirebaseFirestore
-    private lateinit var collectionUser: CollectionReference
-    private lateinit var collectionUserdata: CollectionReference
+    private lateinit var colUsers: CollectionReference
+    private lateinit var colUserdata: CollectionReference
+    private lateinit var docRef: String
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -41,33 +42,31 @@ class NotificationsFragment : Fragment() {
         val root: View = binding.root
 
         database = FirebaseFirestore.getInstance()
-        collectionUser = database.collection("user")
-        collectionUserdata = database.collection("userdata")
+        colUsers = database.collection("users")
+        colUserdata = database.collection("userdata")
 
-        collectionUser
+        docRef = FirebaseAuth.getInstance().currentUser?.uid.toString()
+
+        colUsers
+            .document(docRef)
             .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    binding.tvUsername.text = document.data.getValue("username").toString()
-                    binding.tvEmailPreview.text = document.data.getValue("email").toString()
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
+            .addOnSuccessListener { document ->
+                binding.tvUsername.text = document.data?.getValue("username").toString()
+                binding.tvEmailPreview.text = document.data?.getValue("email").toString()
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents.", exception)
             }
 
-        collectionUserdata
+        colUserdata
+            .document(docRef)
             .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    binding.tvNamePreview.text = document.data.getValue("name").toString()
-                    binding.tvNIMPreview.text = document.data.getValue("nim").toString()
-                    binding.tvSemesterPreview.text = document.data.getValue("semester").toString()
-                    binding.tvFacultyPreview.text = document.data.getValue("faculty").toString()
-                    binding.tvMajorPreview.text = document.data.getValue("major").toString()
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
+            .addOnSuccessListener { document ->
+                binding.tvNamePreview.text = document.data?.getValue("name").toString()
+                binding.tvNIMPreview.text = document.data?.getValue("nim").toString()
+                binding.tvSemesterPreview.text = document.data?.getValue("semester").toString()
+                binding.tvFacultyPreview.text = document.data?.getValue("faculty").toString()
+                binding.tvMajorPreview.text = document.data?.getValue("major").toString()
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents.", exception)
