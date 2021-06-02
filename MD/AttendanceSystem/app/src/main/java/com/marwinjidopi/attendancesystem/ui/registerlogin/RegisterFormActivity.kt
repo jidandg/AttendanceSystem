@@ -14,12 +14,15 @@ import android.widget.Toast
 import androidx.core.content.FileProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.marwinjidopi.attendancesystem.data.UserForm
 import com.marwinjidopi.attendancesystem.databinding.ActivityRegisterFormBinding
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import java.io.File.createTempFile as createTempFile1
 
 @Suppress("DEPRECATION")
 class RegisterFormActivity : AppCompatActivity() {
@@ -29,6 +32,8 @@ class RegisterFormActivity : AppCompatActivity() {
     private lateinit var database: FirebaseFirestore
     val REQUEST_IMAGE_CAPTURE = 0
     lateinit var imageFilePath: String
+    lateinit var bitmap: Bitmap
+    private var photoFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,22 +44,22 @@ class RegisterFormActivity : AppCompatActivity() {
         database = FirebaseFirestore.getInstance()
 
         binding.imgCamera.setOnClickListener {
-            try {
-                val imageFile = createImageFile()
-                val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                if (callCameraIntent.resolveActivity(packageManager) != null) {
-                    val authorities = "$packageName.fileprovider"
-                    val imageUri = FileProvider.getUriForFile(this, authorities, imageFile)
-                    callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-                    startActivityForResult(callCameraIntent, REQUEST_IMAGE_CAPTURE)
-                }
-            } catch (e: IOException) {
-                Toast.makeText(this, "Could not create file!", Toast.LENGTH_SHORT).show()
-            }
+
+            dispatchTakePictureIntent()
+//            try {
+////                val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+////                if (callCameraIntent.resolveActivity(packageManager) != null) {
+////                    val authorities = "$packageName.fileprovider"
+////                    val imageUri = FileProvider.getUriForFile(this, authorities, imageFile)
+////                    callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+////                    startActivityForResult(callCameraIntent, REQUEST_IMAGE_CAPTURE)
+//                }
+//            } catch (e: IOException) {
+//                Toast.makeText(this, "Could not create file!", Toast.LENGTH_SHORT).show()
+//            }
         }
 
         binding.btnSend.setOnClickListener {
-            //val img = binding.imgCamera.setImageURI().toString().trim()
             val name = binding.etName.text.toString().trim()
             val nim = binding.etNIM.text.toString().trim()
             val semester = binding.etSemester.text.toString().trim()
@@ -89,6 +94,7 @@ class RegisterFormActivity : AppCompatActivity() {
                 }
                 else -> {
                     val user = UserForm(name, nim, semester, faculty, major)
+                    uploadImage(bitmap, "asd")
                     database.collection("userdata")
                         .document(FirebaseAuth.getInstance().currentUser?.uid.toString())
                         .set(user)
@@ -115,13 +121,12 @@ class RegisterFormActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        when(requestCode) {
+        when (requestCode) {
             REQUEST_IMAGE_CAPTURE -> {
-/*                if(resultCode == Activity.RESULT_OK && data != null) {
-                    binding.imgCamera.setImageBitmap(data.extras.get("data") as Bitmap)
-                }*/
-                if (resultCode == Activity.RESULT_OK) {
-                    binding.imgCamera.setImageBitmap(setScaledBitmap())
+                if (resultCode == Activity.RESULT_OK && data != null) {
+                    val imageBitmap = BitmapFactory.decodeFile(photoFile?.absolutePath)
+                    binding.imgCamera.setImageBitmap(imageBitmap)
+                    bitmap = imageBitmap
                 }
             }
             else -> {
@@ -130,33 +135,54 @@ class RegisterFormActivity : AppCompatActivity() {
         }
     }
 
-    @Throws(IOException::class)
-    fun createImageFile(): File {
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val imageFileName: String = "JPEG_" + timeStamp + "_"
-        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        if(!storageDir?.exists()!!) storageDir.mkdirs()
-        val imageFile = File.createTempFile(imageFileName, ".jpg", storageDir)
-        imageFilePath = imageFile.absolutePath
-        return imageFile
+    private fun dispatchTakePictureIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                val photoFile: File? = try {
+                    createImageFile()
+                } catch (ex: IOException) {
+                    null
+                }
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                        this,
+                        "$packageName.fileprovider",
+                        it
+                    )
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                }
+            }
+        }
     }
 
-    fun setScaledBitmap(): Bitmap {
-        val imageViewWidth = binding.imgCamera.width
-        val imageViewHeight = binding.imgCamera.height
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        // Create an image file name
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG${timeStamp}_",
+            ".jpg",
+            storageDir
+        ).apply {
+            imageFilePath = absolutePath
+        }
+    }
 
-        val bmOptions = BitmapFactory.Options()
-        bmOptions.inJustDecodeBounds = true
-        BitmapFactory.decodeFile(imageFilePath, bmOptions)
-        val bitmapWidth = bmOptions.outWidth
-        val bitmapHeight = bmOptions.outHeight
-
-        val scaleFactor = Math.min(bitmapWidth/imageViewWidth, bitmapHeight/imageViewHeight)
-
-        bmOptions.inJustDecodeBounds = false
-        bmOptions.inSampleSize = scaleFactor
-
-        return BitmapFactory.decodeFile(imageFilePath, bmOptions)
-
+    private fun uploadImage(img: Bitmap, pictName: String) {
+        val storage = FirebaseStorage.getInstance()
+        val storgaRef = storage.getReferenceFromUrl("gs://attendance-system-9f194.appspot.com")
+        val imagePath = "${pictName}.jpg"
+        val imageRef = storgaRef.child("img/$imagePath")
+        val baos = ByteArrayOutputStream()
+        img.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+        val uploadTask = imageRef.putBytes(data)
+        uploadTask.addOnFailureListener {
+            Toast.makeText(this, "Fail", Toast.LENGTH_LONG).show()
+        }.addOnSuccessListener {
+            Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
+        }
     }
 }
