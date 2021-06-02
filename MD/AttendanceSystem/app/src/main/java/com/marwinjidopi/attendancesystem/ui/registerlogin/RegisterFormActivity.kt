@@ -2,6 +2,7 @@ package com.marwinjidopi.attendancesystem.ui.registerlogin
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +27,8 @@ class RegisterFormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterFormBinding
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
-    val REQUEST_IMAGE_CAPTURE = 1
+    val REQUEST_IMAGE_CAPTURE = 0
+    lateinit var imageFilePath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,21 @@ class RegisterFormActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
+
+        binding.imgCamera.setOnClickListener {
+            try {
+                val imageFile = createImageFile()
+                val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                if (callCameraIntent.resolveActivity(packageManager) != null) {
+                    val authorities = "$packageName.fileprovider"
+                    val imageUri = FileProvider.getUriForFile(this, authorities, imageFile)
+                    callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+                    startActivityForResult(callCameraIntent, REQUEST_IMAGE_CAPTURE)
+                }
+            } catch (e: IOException) {
+                Toast.makeText(this, "Could not create file!", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         binding.btnSend.setOnClickListener {
             //val img = binding.imgCamera.setImageURI().toString().trim()
@@ -93,4 +110,53 @@ class RegisterFormActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when(requestCode) {
+            REQUEST_IMAGE_CAPTURE -> {
+/*                if(resultCode == Activity.RESULT_OK && data != null) {
+                    binding.imgCamera.setImageBitmap(data.extras.get("data") as Bitmap)
+                }*/
+                if (resultCode == Activity.RESULT_OK) {
+                    binding.imgCamera.setImageBitmap(setScaledBitmap())
+                }
+            }
+            else -> {
+                Toast.makeText(this, "Unrecognized request code", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    @Throws(IOException::class)
+    fun createImageFile(): File {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val imageFileName: String = "JPEG_" + timeStamp + "_"
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        if(!storageDir?.exists()!!) storageDir.mkdirs()
+        val imageFile = File.createTempFile(imageFileName, ".jpg", storageDir)
+        imageFilePath = imageFile.absolutePath
+        return imageFile
+    }
+
+    fun setScaledBitmap(): Bitmap {
+        val imageViewWidth = binding.imgCamera.width
+        val imageViewHeight = binding.imgCamera.height
+
+        val bmOptions = BitmapFactory.Options()
+        bmOptions.inJustDecodeBounds = true
+        BitmapFactory.decodeFile(imageFilePath, bmOptions)
+        val bitmapWidth = bmOptions.outWidth
+        val bitmapHeight = bmOptions.outHeight
+
+        val scaleFactor = Math.min(bitmapWidth/imageViewWidth, bitmapHeight/imageViewHeight)
+
+        bmOptions.inJustDecodeBounds = false
+        bmOptions.inSampleSize = scaleFactor
+
+        return BitmapFactory.decodeFile(imageFilePath, bmOptions)
+
+    }
 }
