@@ -30,7 +30,7 @@ class RegisterFormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterFormBinding
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
-    val REQUEST_IMAGE_CAPTURE = 0
+    val REQUEST_IMAGE_CAPTURE = 1
     lateinit var imageFilePath: String
     lateinit var bitmap: Bitmap
     private var photoFile: File? = null
