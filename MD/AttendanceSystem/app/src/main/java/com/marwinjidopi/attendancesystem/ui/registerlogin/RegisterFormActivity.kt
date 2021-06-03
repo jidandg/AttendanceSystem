@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,6 +36,7 @@ class RegisterFormActivity : AppCompatActivity() {
     lateinit var imageFilePath: String
     lateinit var bitmap: Bitmap
     private var photoFile: File? = null
+    private lateinit var photoURI: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,7 +113,7 @@ class RegisterFormActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            val imageBitmap = BitmapFactory.decodeFile(photoFile?.absolutePath)
+            val imageBitmap = getRotatedImage(photoURI)
             binding.imgCamera.setImageBitmap(imageBitmap)
             bitmap = imageBitmap
         } else {
@@ -128,7 +131,7 @@ class RegisterFormActivity : AppCompatActivity() {
                     null
                 }
                 photoFile?.also {
-                    val photoURI: Uri = FileProvider.getUriForFile(
+                    photoURI = FileProvider.getUriForFile(
                         this,
                         "$packageName.fileprovider",
                         it
@@ -151,6 +154,16 @@ class RegisterFormActivity : AppCompatActivity() {
             storageDir
         ).apply {
             imageFilePath = absolutePath
+        }
+    }
+
+    private fun getRotatedImage(uri: Uri): Bitmap {
+        val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+        return when (contentResolver.openInputStream(uri)?.let { ExifInterface(it).getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED) }) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, Matrix().apply { postRotate(90F) }, true)
+            ExifInterface.ORIENTATION_ROTATE_180 -> Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, Matrix().apply { postRotate(180F) }, true)
+            ExifInterface.ORIENTATION_ROTATE_270 -> Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, Matrix().apply { postRotate(270F) }, true)
+            else -> bitmap
         }
     }
 

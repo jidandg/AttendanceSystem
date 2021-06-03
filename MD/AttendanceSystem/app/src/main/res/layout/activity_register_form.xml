@@ -23,8 +23,8 @@
 
         <ImageButton
             android:id="@+id/imgCamera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
             android:layout_marginTop="20dp"
             android:contentDescription="@string/image_camera"
             android:src="@drawable/ic_baseline_camera"
