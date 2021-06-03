@@ -1,6 +1,7 @@
 package com.marwinjidopi.attendancesystem.ui.notifications
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,12 +16,14 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.marwinjidopi.attendancesystem.databinding.FragmentNotificationsBinding
+import com.marwinjidopi.attendancesystem.ui.registerlogin.LoginActivity
 
 
 class NotificationsFragment : Fragment() {
 
     private lateinit var notificationsViewModel: NotificationsViewModel
     private var _binding: FragmentNotificationsBinding? = null
+    private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
     private lateinit var colUsers: CollectionReference
     private lateinit var colUserdata: CollectionReference
@@ -41,6 +44,7 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        mAuth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
         colUsers = database.collection("users")
         colUserdata = database.collection("userdata")
@@ -72,6 +76,10 @@ class NotificationsFragment : Fragment() {
                 Log.w(TAG, "Error getting documents.", exception)
             }
 
+        binding.btnLogout.setOnClickListener {
+            logOut()
+        }
+
         return root
     }
 
@@ -82,5 +90,13 @@ class NotificationsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun logOut()
+    {
+        mAuth.signOut()
+        val intent = Intent(activity, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }
