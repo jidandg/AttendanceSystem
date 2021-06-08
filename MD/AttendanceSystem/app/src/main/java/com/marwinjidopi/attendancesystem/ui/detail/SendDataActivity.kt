@@ -51,7 +51,7 @@ class SendDataActivity : AppCompatActivity() {
             dispatchTakePictureIntent()
         }
         binding.btnSendData.setOnClickListener {
-            val data = AbsentForm(bitmap)
+            val data = AbsentForm(bitmap.toString())
             uploadImage(bitmap, FirebaseAuth.getInstance().currentUser?.uid.toString())
             database.collection("userAbsent")
                 .document(FirebaseAuth.getInstance().currentUser?.uid.toString())
