@@ -23,7 +23,9 @@
         android:theme="@style/Theme.AttendanceSystem"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.SplashScreenActivity">
+        <activity
+            android:name=".ui.SplashScreenActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
