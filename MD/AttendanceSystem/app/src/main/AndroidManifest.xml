@@ -23,18 +23,18 @@
         android:theme="@style/Theme.AttendanceSystem"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.SplashScreenActivity"></activity>
-        <activity android:name=".ui.detail.SendDataActivity" />
-        <activity android:name=".ui.detail.DetailActivity" />
-        <activity android:name=".ui.registerlogin.RegisterFormActivity" />
-        <activity android:name=".ui.registerlogin.ForgotPasswordActivity" />
-        <activity android:name=".ui.registerlogin.LoginActivity">
+        <activity android:name=".ui.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.detail.SendDataActivity" />
+        <activity android:name=".ui.detail.DetailActivity" />
+        <activity android:name=".ui.registerlogin.RegisterFormActivity" />
+        <activity android:name=".ui.registerlogin.ForgotPasswordActivity" />
+        <activity android:name=".ui.registerlogin.LoginActivity" />
         <activity android:name=".ui.registerlogin.RegisterActivity" />
         <activity
             android:name=".ui.MainActivity"
