@@ -23,4 +23,6 @@
     <string name="please_fill_your_data">Please Fill Your Data</string>
     <string name="image_camera">Image Camera</string>
     <string name="logout">Logout</string>
+    <string name="please_capture_your_face_precisely">Please Capture Your Face Precisely</string>
+    <string name="tap_this_icon_to_open_camera">Tap This Icon to Open Camera</string>
 </resources>

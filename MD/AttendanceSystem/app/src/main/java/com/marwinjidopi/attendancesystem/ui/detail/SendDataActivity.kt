@@ -1,4 +1,4 @@
-package com.marwinjidopi.attendancesystem.ui.registerlogin
+package com.marwinjidopi.attendancesystem.ui.detail
 
 import android.app.Activity
 import android.content.Intent
@@ -18,8 +18,9 @@ import androidx.core.content.FileProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.marwinjidopi.attendancesystem.data.UserForm
-import com.marwinjidopi.attendancesystem.databinding.ActivityRegisterFormBinding
+import com.marwinjidopi.attendancesystem.data.AbsentForm
+import com.marwinjidopi.attendancesystem.databinding.ActivitySendDataBinding
+import com.marwinjidopi.attendancesystem.ui.registerlogin.LoginActivity
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
@@ -27,9 +28,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Suppress("DEPRECATION")
-class RegisterFormActivity : AppCompatActivity() {
+class SendDataActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityRegisterFormBinding
+    private lateinit var binding: ActivitySendDataBinding
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
     private val IMAGE_CAPTURE = 1
@@ -40,72 +41,36 @@ class RegisterFormActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterFormBinding.inflate(layoutInflater)
+        binding = ActivitySendDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         mAuth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
 
-        binding.imgCamera.setOnClickListener {
+        binding.imgCameraSendData.setOnClickListener {
             dispatchTakePictureIntent()
         }
-
-        binding.btnSend.setOnClickListener {
-            val name = binding.etName.text.toString().trim()
-            val nim = binding.etNIM.text.toString().trim()
-            val semester = binding.etSemester.text.toString().trim()
-            val faculty = binding.etFaculty.text.toString().trim()
-            val major = binding.etMajor.text.toString().trim()
-
-            when {
-                name.isEmpty() -> {
-                    binding.etName.error = "This field is required"
-                    binding.etName.requestFocus()
-                    return@setOnClickListener
+        binding.btnSendData.setOnClickListener {
+            val data = AbsentForm(bitmap)
+            uploadImage(bitmap, FirebaseAuth.getInstance().currentUser?.uid.toString())
+            database.collection("userAbsent")
+                .document(FirebaseAuth.getInstance().currentUser?.uid.toString())
+                .set(data)
+                .addOnSuccessListener {
+                    Log.d(
+                        "SendDataActivity",
+                        "successfully Written!"
+                    )
                 }
-                nim.isEmpty() -> {
-                    binding.etNIM.error = "This field is required"
-                    binding.etNIM.requestFocus()
-                    return@setOnClickListener
+                .addOnFailureListener {
+                    Log.d(
+                        "SendDataActivity",
+                        "Error when write document!"
+                    )
                 }
-                semester.isEmpty() -> {
-                    binding.etSemester.error = "This field is required"
-                    binding.etSemester.requestFocus()
-                    return@setOnClickListener
-                }
-                faculty.isEmpty() -> {
-                    binding.etFaculty.error = "This field is required"
-                    binding.etFaculty.requestFocus()
-                    return@setOnClickListener
-                }
-                major.isEmpty() -> {
-                    binding.etMajor.error = "This field is required"
-                    binding.etMajor.requestFocus()
-                    return@setOnClickListener
-                }
-                else -> {
-                    val user = UserForm(bitmap, name, nim, semester, faculty, major)
-                    uploadImage(bitmap, FirebaseAuth.getInstance().currentUser?.uid.toString())
-                    database.collection("userdata")
-                        .document(FirebaseAuth.getInstance().currentUser?.uid.toString())
-                        .set(user)
-                        .addOnSuccessListener {
-                            Log.d(
-                                "RegisterActivity",
-                                "successfully Written!"
-                            )
-                        }
-                        .addOnFailureListener {
-                            Log.d(
-                                "RegisterActivity",
-                                "Error when write document!"
-                            )
-                        }
-                    Toast.makeText(this, "Register successfully!", Toast.LENGTH_SHORT)
-                        .show()
-                    startActivity(Intent(this, LoginActivity::class.java))
-                }
-            }
+            Toast.makeText(this, "Upload successfully!", Toast.LENGTH_SHORT)
+                .show()
+            startActivity(Intent(this, DetailActivity::class.java))
         }
     }
 
@@ -115,7 +80,7 @@ class RegisterFormActivity : AppCompatActivity() {
 
         if (requestCode == IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val imageBitmap = getRotatedImage(photoURI)
-            binding.imgCamera.setImageBitmap(imageBitmap)
+            binding.imgCameraSendData.setImageBitmap(imageBitmap)
             bitmap = imageBitmap
         } else {
             Toast.makeText(this, "Unrecognized request code", Toast.LENGTH_SHORT).show()
@@ -203,7 +168,7 @@ class RegisterFormActivity : AppCompatActivity() {
         val storageRef = storage.getReferenceFromUrl("gs://attendance-system-9f194.appspot.com")
         val imagePath = "${pictName}.jpg"
         val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        val imageRef = storageRef.child("img/$userId/$imagePath")
+        val imageRef = storageRef.child("imgDataAbsent/$userId/$imagePath")
         val byteArrayOutputStream = ByteArrayOutputStream()
         img.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
         val data = byteArrayOutputStream.toByteArray()
