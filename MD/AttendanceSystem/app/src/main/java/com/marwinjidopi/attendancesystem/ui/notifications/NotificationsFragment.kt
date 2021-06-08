@@ -67,7 +67,7 @@ class NotificationsFragment : Fragment() {
             .get()
             .addOnSuccessListener { document ->
                 Glide.with(this)
-                    .load(document.data?.getValue("image"))
+                    .load(document.data?.getValue("img"))
                     .into(binding.imgProfile)
                 binding.tvNamePreview.text = document.data?.getValue("name").toString()
                 binding.tvNIMPreview.text = document.data?.getValue("nim").toString()

@@ -84,7 +84,7 @@ class RegisterFormActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
                 else -> {
-                    val user = UserForm(bitmap.toString(), name, nim, semester, faculty, major)
+                    val user = UserForm(bitmap, name, nim, semester, faculty, major)
                     uploadImage(bitmap, FirebaseAuth.getInstance().currentUser?.uid.toString())
                     database.collection("userdata")
                         .document(FirebaseAuth.getInstance().currentUser?.uid.toString())
