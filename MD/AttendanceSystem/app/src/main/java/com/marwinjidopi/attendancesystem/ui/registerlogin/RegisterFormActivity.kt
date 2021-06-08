@@ -3,16 +3,17 @@ package com.marwinjidopi.attendancesystem.ui.registerlogin
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,7 +25,6 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-import java.io.File.createTempFile as createTempFile1
 
 @Suppress("DEPRECATION")
 class RegisterFormActivity : AppCompatActivity() {
@@ -32,7 +32,7 @@ class RegisterFormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterFormBinding
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
-    val REQUEST_IMAGE_CAPTURE = 1
+    private val IMAGE_CAPTURE = 1
     lateinit var imageFilePath: String
     lateinit var bitmap: Bitmap
     private var photoFile: File? = null
@@ -84,7 +84,7 @@ class RegisterFormActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
                 else -> {
-                    val user = UserForm(name, nim, semester, faculty, major)
+                    val user = UserForm(bitmap, name, nim, semester, faculty, major)
                     uploadImage(bitmap, FirebaseAuth.getInstance().currentUser?.uid.toString())
                     database.collection("userdata")
                         .document(FirebaseAuth.getInstance().currentUser?.uid.toString())
@@ -109,10 +109,11 @@ class RegisterFormActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val imageBitmap = getRotatedImage(photoURI)
             binding.imgCamera.setImageBitmap(imageBitmap)
             bitmap = imageBitmap
@@ -137,7 +138,7 @@ class RegisterFormActivity : AppCompatActivity() {
                         it
                     )
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                    startActivityForResult(takePictureIntent, IMAGE_CAPTURE)
                 }
             }
         }
@@ -157,24 +158,54 @@ class RegisterFormActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun getRotatedImage(uri: Uri): Bitmap {
         val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
-        return when (contentResolver.openInputStream(uri)?.let { ExifInterface(it).getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED) }) {
-            ExifInterface.ORIENTATION_ROTATE_90 -> Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, Matrix().apply { postRotate(90F) }, true)
-            ExifInterface.ORIENTATION_ROTATE_180 -> Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, Matrix().apply { postRotate(180F) }, true)
-            ExifInterface.ORIENTATION_ROTATE_270 -> Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, Matrix().apply { postRotate(270F) }, true)
+        return when (contentResolver.openInputStream(uri)?.let {
+            ExifInterface(it).getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_UNDEFINED
+            )
+        }) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> Bitmap.createBitmap(
+                bitmap,
+                0,
+                0,
+                bitmap.width,
+                bitmap.height,
+                Matrix().apply { postRotate(90F) },
+                true
+            )
+            ExifInterface.ORIENTATION_ROTATE_180 -> Bitmap.createBitmap(
+                bitmap,
+                0,
+                0,
+                bitmap.width,
+                bitmap.height,
+                Matrix().apply { postRotate(180F) },
+                true
+            )
+            ExifInterface.ORIENTATION_ROTATE_270 -> Bitmap.createBitmap(
+                bitmap,
+                0,
+                0,
+                bitmap.width,
+                bitmap.height,
+                Matrix().apply { postRotate(270F) },
+                true
+            )
             else -> bitmap
         }
     }
 
     private fun uploadImage(img: Bitmap, pictName: String) {
         val storage = FirebaseStorage.getInstance()
-        val storgaRef = storage.getReferenceFromUrl("gs://attendance-system-9f194.appspot.com")
+        val storageRef = storage.getReferenceFromUrl("gs://attendance-system-9f194.appspot.com")
         val imagePath = "${pictName}.jpg"
-        val imageRef = storgaRef.child("img/$imagePath")
-        val baos = ByteArrayOutputStream()
-        img.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()
+        val imageRef = storageRef.child("img/$imagePath")
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        img.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        val data = byteArrayOutputStream.toByteArray()
         val uploadTask = imageRef.putBytes(data)
         uploadTask.addOnFailureListener {
             Toast.makeText(this, "Fail", Toast.LENGTH_LONG).show()

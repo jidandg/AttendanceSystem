@@ -1,13 +1,9 @@
 package com.marwinjidopi.attendancesystem.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.marwinjidopi.attendancesystem.data.ContentEntity
+import com.marwinjidopi.attendancesystem.utils.DataDummy
 
 class HomeViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+    fun getListClass(): List<ContentEntity> = DataDummy.generateDummyData()
 }

@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.marwinjidopi.attendancesystem.MainActivity
+import com.marwinjidopi.attendancesystem.ui.MainActivity
 import com.marwinjidopi.attendancesystem.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
