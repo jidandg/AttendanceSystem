@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- <link rel="firebase" href="../firebase.json"> -->
+    
+    <script>
+        // script for HOME, KEHADIRAN, DAFTAR SISWA, PROFILE navbar.
+        function Navbar(navbarName) 
+        {
+            var i;
+            var x = document.getElementsByClassName("navbar");
+            for (i = 0; i < x.length; i++) 
+            {
+                x[i].style.display = "none";
+            }
+            document.getElementById(navbarName).style.display = "flex";
+        }
+
+        //script for All Class, Cloud Computing, Machine Learning, and Mobile Development hover menu.
+        function Kelas(kelasName)
+        {
+            var a;
+            var b = document.getElementsByClassName("kelas");
+            for (a = 0; a < b.length; a++)
+            {
+                b[a].style.display = "none";
+            }
+            document.getElementById(kelasName).style.display = "block";
+        }
+    </script>
+    
+    <!-- page name -->
+    <title>Bangkit Student Attendance</title>
+</head>
+
+<body class="body-bg">
+    <div class="header-bg">
+        <!-- Bangkit logo in web page -->
+        <center><a href="#Home"><img src="asset/bangkit.png" height="130px" width="600px" alt="logo Bangkit"></a></center>
+    </div>
+    
+    <!-- web page navbar -->
+    <div class="w3-bar nav-color">
+        <button class="w3-bar-item w3-button" onclick="Navbar('Home')">HOME</button>
+        <button class="w3-bar-item w3-button" onclick="Navbar('Attend')">ATTENDANCE</button>
+        <!-- <button class="w3-bar-item w3-button" onclick="Navbar('Student')">DAFTAR SISWA</button> -->
+        <button class="w3-bar-item w3-button w3-right"><a class="custom" href="login.html">LOGOUT</a></button>
+    </div>
+
+    <div>
+        <center>
+            <!-- accessories web page -->
+            <img src="asset/mat2.png" width="1400px" height="100px" alt="">
+        </center>
+    </div>
+    
+    <!-- image slide in home page for student breaking news -->
+    <div id="Home" class="w3-container navbar">
+        <div class="w3-col">
+            <h1 class="w3-text-red w3-center w3-animate-zoom" style="text-shadow:1px 1px 0 #444">Welcome Back!</h1>
+            <p class="p-style">Breaking News For Student</p>
+        </div>
+        <div class="w3-col w3-content w3-display-container">
+            <img class="mySlides" src="asset/slide1.jpg" width="100%" >
+            <img class="mySlides" src="asset/slide2.jpg" width="100%" >
+            <img class="mySlides" src="asset/slide3.jpg" width="100%" >
+
+            <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+            <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+        </div>
+
+        <script>
+            var slideIndex = 1;
+                showDivs(slideIndex);
+
+            function plusDivs(n)
+            {
+                showDivs(slideIndex += n);
+            }   
+
+            function showDivs(n) 
+            {  
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                    if (n > x.length) {slideIndex = 1}
+                    if (n < 1) {slideIndex = x.length}
+                    for (i = 0; i < x.length; i++) 
+                    {
+                        x[i].style.display = "none";  
+                    }
+                    x[slideIndex-1].style.display = "block";  
+            }
+        </script>
+    </div>
+
+    <!-- page when we click navbar KEHADIRAN -->
+    <div id="Attend" class="w3-container navbar" style="display:none">
+        <div class="w3-col w3-margin-bottom">
+            <h1 class="w3-text-red w3-center w3-animate-zoom" style="text-shadow:1px 1px 0 #444">Class Attendance Input</h1>
+            <center><p>please choose one from class list below</p></center>
+        </div>
+        <div class="w3-col w3-content w3-display-container">
+            <div class="flex-container">
+
+                <!-- CC class input attendance -->
+                <div class="w3-card bg-light">
+                    <div class="w3-container w3-center">
+                        <img src="asset/cc.jpg" alt="Avatar" style="width:60%">
+                        <h5 class="h5-style">Cloud Computing Class</h5>
+                        <a class="w3-button w3-green" href="stdn_cc/student_cc_p.html">PRESENT</a>
+                        <a class="w3-button w3-red" href="stdn_cc/student_cc_a.html">ABSENT</a>
+                    </div>
+                </div>
+                
+                <!-- MD class input attendance -->
+                <div class="w3-card bg-light">
+                    <div class="w3-container w3-center">
+                        <img src="asset/md.jpg" alt="Avatar" style="width:60%">
+                        <h5 class="h5-style">Mobile Development Class</h5>
+                        <a class="w3-button w3-green" href="stdn_md/student_md_p.html">PRESENT</a>
+                        <a class="w3-button w3-red" href="stdn_md/student_md_a.html">ABSENT</a>
+                    </div>
+                </div>
+                
+                <!-- ML class input attendance -->
+                <div class="w3-card bg-light">
+                    <div class="w3-container w3-center">
+                        <img src="asset/ml.jpg" alt="Avatar" style="width:60%">
+                        <h5 class="h5-style">Machine Learning Class</h5>
+                        <a class="w3-button w3-green" href="stdn_ml/student_ml_p.html">PRESENT</a>
+                        <a class="w3-button w3-red" href="stdn_ml/student_ml_a.html">ABSENT</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="logout">
+    <!-- if we choose LOGOUT menu -->
+    <a href="form.html"></a>
+    </div>
+</body>
+</html>

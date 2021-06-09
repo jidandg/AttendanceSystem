@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="../../style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <title>ABSENT ATTENDANCE</title>
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+    </head>
+
+<body class="body-bg">
+    <div class="header-bg">        
+        <!-- Bangkit logo in web page -->
+        <center><a href="#Home"><img src="../../asset/bangkit.png" height="130px" width="600px" alt="logo Bangkit"></a></center>
+    </div>
+        <!-- web page navbar -->
+    <div class="w3-bar nav-color">
+        <button class="w3-bar-item w3-button" onclick="Navbar('Home')"></button>
+        <button class="w3-bar-item w3-button" onclick="Navbar('Attend')"></button>
+    </div>
+    <div>
+        <center>
+            <!-- accessories web page -->
+            <img src="../../asset/mat2.png" width="1400px" height="100px" alt="">
+        </center>
+    </div>
+    <div id="Attend" class="w3-container navbar">
+        <div class="w3-col w3-content w3-display-container">
+        <h5 class="w3-panel w3-border-left w3-pale-green w3-border-green w3-padding">
+            Please fill in the attendance information in the box below. Click SAVE when finished.
+        </h5>
+            <div class="w3-container w3-center">
+                <h1 class="w3-serif"> Muhammad Fauzi Rahmad </h1>
+                <div class="w3-container w3-margin-bottom">
+                    AttendStatus:
+                    <input type="textfield" placeholder="(present/absent)" id="latesAttendanceStatus" />
+                </div>
+                <div class="w3-container">
+                    Date / Time :
+                    <input type="textfield" placeholder="(09/06/2021 11:00)" id="latesAttendanceDateTime" />
+                    <!-- <button class="btn btn-primary" id="saveButton2"> SAVE </button> -->
+                </div>
+                <div class="w3-margin">
+                    <button class="btn btn-primary" id="saveButton"> SAVE </button>
+                    <button class="btn btn-light"><a class="custom w3-text-black" href="../../index.html">BACK</a></button>
+                </div>
+                <script src="./app.js"></script>
+            </div>
+        </div>
+    </div>
+        
+</body>
+</html>
