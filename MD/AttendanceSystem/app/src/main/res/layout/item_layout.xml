@@ -1,80 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/img_class"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/img_class"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tvClassName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
-                android:maxLines="1"
-                android:text="Pemrosesan Sinyal Multimedia"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/tvPengajar"
-                app:layout_constraintEnd_toEndOf="parent"
+            <ImageView
+                android:id="@+id/img_class"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:contentDescription="@string/description_class_image"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvPengajar"
+                android:id="@+id/tvClassName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:ellipsize="end"
-                android:fontFamily="@font/poppins_light"
-                android:maxLines="2"
-                android:text="Dadang Gunawan"
+                android:layout_marginStart="16dp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvClassName" />
+                android:fontFamily="@font/poppins_bold"
+                app:layout_constraintStart_toEndOf="@id/img_class"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/dummy_text" />
 
             <TextView
-                android:id="@+id/tvClock"
+                android:id="@+id/tvPengajar1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:ellipsize="end"
-                android:fontFamily="@font/poppins_light"
-                android:maxLines="1"
-                android:text="10.00 WIB"
+                android:layout_marginStart="16dp"
                 android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPengajar" />
+                android:fontFamily="@font/poppins_light"
+                app:layout_constraintStart_toEndOf="@id/img_class"
+                app:layout_constraintTop_toBottomOf="@+id/tvClassName"
+                tools:text="@string/dummy_text" />
+
+            <TextView
+                android:id="@+id/tvPengajar2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_light"
+                app:layout_constraintStart_toEndOf="@id/img_class"
+                app:layout_constraintTop_toBottomOf="@+id/tvPengajar1"
+                tools:text="@string/dummy_text" />
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_light"
+                app:layout_constraintStart_toEndOf="@id/img_class"
+                app:layout_constraintTop_toBottomOf="@+id/tvPengajar2"
+                tools:text="@string/dummy_text" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/cardView"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

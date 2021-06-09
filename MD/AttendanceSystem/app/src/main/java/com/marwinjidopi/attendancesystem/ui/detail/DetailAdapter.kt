@@ -8,7 +8,6 @@ import com.marwinjidopi.attendancesystem.databinding.ClassLayoutBinding
 import kotlin.collections.ArrayList
 
 class DetailAdapter : RecyclerView.Adapter<DetailAdapter.Holder>() {
-
     private var userList = ArrayList<ClassEntity>()
 
     fun setData(data: ClassEntity) {
@@ -35,7 +34,8 @@ class DetailAdapter : RecyclerView.Adapter<DetailAdapter.Holder>() {
             with(binding) {
                 tvClassName.text = data.className
                 tvLink.text = data.classLink
-                tvClock.text = data.classDate + "|" + data.classTime + "WIB"
+                tvDate.text = data.classDate
+                tvTime.text = data.classTime
             }
         }
     }

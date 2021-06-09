@@ -12,7 +12,6 @@ import com.marwinjidopi.attendancesystem.ui.detail.DetailActivity
 import com.marwinjidopi.attendancesystem.ui.home.HomeAdapter.*
 
 class HomeAdapter : RecyclerView.Adapter<Holder>() {
-
     private var listData = ArrayList<ContentEntity>()
 
     fun setData(data: List<ContentEntity>) {
@@ -26,14 +25,15 @@ class HomeAdapter : RecyclerView.Adapter<Holder>() {
                 imgClass.setImageDrawable(
                     AvatarGenerator.avatarImage(
                         itemView.context,
-                        200,
+                        700,
                         AvatarConstants.CIRCLE,
                         data.className
                     )
                 )
                 tvClassName.text = data.className
-                tvPengajar.text = data.classTeacherI + " | " + data.classTeacherII
-                tvClock.text = data.classTime
+                tvPengajar1.text = data.classTeacherI
+                tvPengajar2.text = data.classTeacherII
+                tvDate.text = data.classTime
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailActivity::class.java)
                     intent.putExtra(DetailActivity.EXTRA_CONTENT, data.id)

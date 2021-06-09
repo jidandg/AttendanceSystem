@@ -1,5 +1,6 @@
 package com.marwinjidopi.attendancesystem.ui.register_form
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Matrix
@@ -28,7 +29,6 @@ import java.util.*
 
 @Suppress("DEPRECATION")
 class RegisterFormActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityRegisterFormBinding
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
@@ -42,6 +42,8 @@ class RegisterFormActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.title = "Register Form"
 
         mAuth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()

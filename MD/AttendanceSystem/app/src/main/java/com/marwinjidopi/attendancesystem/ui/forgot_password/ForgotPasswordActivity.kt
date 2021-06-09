@@ -7,7 +7,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.marwinjidopi.attendancesystem.databinding.ActivityForgotPasswordBinding
 
 class ForgotPasswordActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityForgotPasswordBinding
     private lateinit var mAuth: FirebaseAuth
 
@@ -15,6 +14,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Reset Password"
 
         mAuth = FirebaseAuth.getInstance()
 
@@ -31,6 +33,5 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     }
             }
         }
-
     }
 }

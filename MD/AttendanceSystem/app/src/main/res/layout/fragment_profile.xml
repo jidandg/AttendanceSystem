@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,9 +11,8 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/blue_gray_700"
-        android:paddingBottom="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/blue_gray_200"
+        android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,186 +21,193 @@
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_username"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvUsername"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/username"
-            android:textColor="@color/white"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="@font/poppins_bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgProfile" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgProfile"
+            tools:text="@string/dummy_text" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/name"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_bold"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Name"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
     <TextView
         android:id="@+id/tvNamePreview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_light"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="%1s"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        tools:text="@string/dummy_text" />
 
     <TextView
         android:id="@+id/tvEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvName"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         android:text="@string/email"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"/>
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvName" />
 
     <TextView
         android:id="@+id/tvEmailPreview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvNamePreview"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_light"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="%1s"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintTop_toBottomOf="@id/tvNamePreview"
+        tools:text="@string/dummy_text" />
 
     <TextView
         android:id="@+id/tvPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvEmail"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         android:text="@string/password"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"/>
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEmail" />
 
     <TextView
         android:id="@+id/tvChangePassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvEmail"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/change_password"
-        android:textColor="@color/blue_700"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"/>
+        android:textSize="16sp"
+        android:textColor="@color/blue_500"
+        android:fontFamily="@font/poppins_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEmail" />
 
     <TextView
         android:id="@+id/tvNIM"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvPassword"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         android:text="@string/nim"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"/>
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPassword" />
 
     <TextView
         android:id="@+id/tvNIMPreview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvChangePassword"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_light"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="%1s"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintTop_toBottomOf="@id/tvChangePassword"
+        tools:text="@string/dummy_text" />
 
     <TextView
         android:id="@+id/tvSemester"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvNIM"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         android:text="@string/semester"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"/>
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNIM" />
 
     <TextView
         android:id="@+id/tvSemesterPreview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvNIMPreview"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_light"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="%1s"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintTop_toBottomOf="@id/tvNIMPreview"
+        tools:text="@string/dummy_text" />
 
     <TextView
         android:id="@+id/tvFaculty"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvSemester"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/faculty"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_bold"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/Faculty"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintTop_toBottomOf="@id/tvSemester" />
 
     <TextView
         android:id="@+id/tvFacultyPreview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvSemesterPreview"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_light"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="%1s"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintTop_toBottomOf="@id/tvSemesterPreview"
+        tools:text="@string/dummy_text" />
 
     <TextView
         android:id="@+id/tvMajor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvFaculty"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/major"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_bold"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/Major"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintTop_toBottomOf="@id/tvFaculty" />
 
     <TextView
         android:id="@+id/tvMajorPreview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tvFacultyPreview"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_light"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="%1s"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintTop_toBottomOf="@id/tvFacultyPreview"
+        tools:text="@string/dummy_text" />
 
     <Button
         android:id="@+id/btn_logout"
@@ -208,6 +215,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/logout"
+        android:fontFamily="@font/poppins_medium"
         app:layout_constraintTop_toBottomOf="@id/tvMajor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

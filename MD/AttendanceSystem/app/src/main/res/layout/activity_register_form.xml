@@ -1,46 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".ui.register_form.RegisterFormActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
             android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:gravity="center"
             android:text="@string/please_fill_your_data"
-            android:textColor="#000"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/imgCamera"
-            android:layout_width="256dp"
-            android:layout_height="256dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:scaleType="fitXY"
+            android:layout_marginTop="16dp"
             android:contentDescription="@string/image_camera"
             android:src="@drawable/ic_baseline_camera"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
         <TextView
             android:id="@+id/tvFullName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
             android:text="@string/full_name"
             android:textColor="@color/black"
             android:textSize="16sp"
+            android:fontFamily="@font/poppins_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imgCamera" />
 
@@ -48,26 +54,26 @@
             android:id="@+id/etName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:hint="@string/full_name"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="@font/poppins_light"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvFullName" />
 
         <TextView
             android:id="@+id/tvNIMProfile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="4dp"
             android:text="@string/nim"
             android:textColor="@color/black"
             android:textSize="16sp"
+            android:fontFamily="@font/poppins_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etName" />
 
@@ -75,12 +81,11 @@
             android:id="@+id/etNIM"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:hint="@string/nim"
             android:importantForAutofill="no"
             android:inputType="text|number"
+            android:fontFamily="@font/poppins_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvNIMProfile" />
@@ -89,11 +94,12 @@
             android:id="@+id/tvSemesterProfile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="4dp"
             android:text="@string/semester"
             android:textColor="@color/black"
             android:textSize="16sp"
+            android:fontFamily="@font/poppins_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etNIM" />
 
@@ -101,12 +107,11 @@
             android:id="@+id/etSemester"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:autofillHints="Password"
             android:hint="@string/semester"
             android:inputType="text|number"
+            android:fontFamily="@font/poppins_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvSemesterProfile" />
@@ -115,11 +120,12 @@
             android:id="@+id/tvFacultyProfile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/Faculty"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/faculty"
             android:textColor="@color/black"
             android:textSize="16sp"
+            android:fontFamily="@font/poppins_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etSemester" />
 
@@ -127,12 +133,11 @@
             android:id="@+id/etFaculty"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:autofillHints="Password"
-            android:hint="@string/Faculty"
+            android:hint="@string/faculty"
             android:inputType="text"
+            android:fontFamily="@font/poppins_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvFacultyProfile" />
@@ -141,11 +146,12 @@
             android:id="@+id/tvMajorProfile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/Major"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/major"
             android:textColor="@color/black"
             android:textSize="16sp"
+            android:fontFamily="@font/poppins_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etFaculty" />
 
@@ -153,12 +159,11 @@
             android:id="@+id/etMajor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:autofillHints="Password"
-            android:hint="@string/Major"
+            android:hint="@string/major"
             android:inputType="text"
+            android:fontFamily="@font/poppins_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -166,17 +171,15 @@
 
         <Button
             android:id="@+id/btnSend"
-            android:layout_width="0dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@string/send"
-            android:textColor="#FFF"
-            app:cornerRadius="50dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="@font/poppins_medium"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etMajor"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etMajor" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.core.widget.NestedScrollView>

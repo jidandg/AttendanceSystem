@@ -4,10 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import com.marwinjidopi.attendancesystem.data.entity.ClassEntity
 import com.marwinjidopi.attendancesystem.databinding.ActivityMainBinding
-import com.marwinjidopi.attendancesystem.ui.detail.DetailAdapter
-import com.marwinjidopi.tab.ui.main.SectionsPagerAdapter
+import com.marwinjidopi.attendancesystem.ui.main.SectionsPagerAdapter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

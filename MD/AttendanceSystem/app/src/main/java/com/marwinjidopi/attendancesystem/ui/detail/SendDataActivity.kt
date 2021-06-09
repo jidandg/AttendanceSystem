@@ -20,8 +20,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.marwinjidopi.attendancesystem.data.AbsentForm
 import com.marwinjidopi.attendancesystem.databinding.ActivitySendDataBinding
-import com.marwinjidopi.attendancesystem.ui.detail.DetailActivity.Companion.globalData
-import com.marwinjidopi.attendancesystem.ui.login.LoginActivity
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
@@ -30,7 +28,6 @@ import java.util.*
 
 @Suppress("DEPRECATION")
 class SendDataActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivitySendDataBinding
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
@@ -45,12 +42,16 @@ class SendDataActivity : AppCompatActivity() {
         binding = ActivitySendDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Record Attendance"
+
         mAuth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
 
         binding.imgCameraSendData.setOnClickListener {
             dispatchTakePictureIntent()
         }
+
         binding.btnSendData.setOnClickListener {
             val data = AbsentForm(bitmap.toString())
             uploadImage(bitmap, FirebaseAuth.getInstance().currentUser?.uid.toString())
@@ -69,8 +70,7 @@ class SendDataActivity : AppCompatActivity() {
                         "Error when write document!"
                     )
                 }
-            Toast.makeText(this, "Upload successfully!", Toast.LENGTH_SHORT)
-                .show()
+            Toast.makeText(this, "Upload successfully!", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, DetailActivity::class.java))
         }
     }
@@ -167,7 +167,7 @@ class SendDataActivity : AppCompatActivity() {
     private fun uploadImage(img: Bitmap, pictName: String) {
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.getReferenceFromUrl("gs://attendance-system-9f194.appspot.com")
-        val imagePath = "${pictName + globalData}.jpg"
+        val imagePath = "${pictName}.jpg"
         val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val imageRef = storageRef.child("imgDataAbsent/$userId/$imagePath")
         val byteArrayOutputStream = ByteArrayOutputStream()

@@ -13,13 +13,11 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.marwinjidopi.attendancesystem.databinding.FragmentProfileBinding
+import com.marwinjidopi.attendancesystem.ui.forgot_password.ForgotPasswordActivity
 import com.marwinjidopi.attendancesystem.ui.login.LoginActivity
 import com.marwinjidopi.attendancesystem.utils.GlideApp
-import com.marwinjidopi.attendancesystem.utils.MyAppGlideModule
-
 
 class ProfileFragment : Fragment() {
-
     private var _binding: FragmentProfileBinding? = null
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
@@ -29,12 +27,7 @@ class ProfileFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -81,15 +74,16 @@ class ProfileFragment : Fragment() {
                 Log.w(TAG, "Error getting documents.", exception)
             }
 
+        binding.tvChangePassword.setOnClickListener {
+            val intent = Intent(activity, ForgotPasswordActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btnLogout.setOnClickListener {
             logOut()
         }
 
         return root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {

@@ -36,8 +36,12 @@
         <activity android:name=".ui.detail.DetailActivity" />
         <activity android:name=".ui.register_form.RegisterFormActivity" />
         <activity android:name=".ui.forgot_password.ForgotPasswordActivity" />
-        <activity android:name=".ui.login.LoginActivity" />
-        <activity android:name=".ui.register.RegisterActivity" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:theme="@style/Theme.AttendanceSystem.NoActionBar" />
+        <activity
+            android:name=".ui.register.RegisterActivity"
+            android:theme="@style/Theme.AttendanceSystem.NoActionBar" />
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"

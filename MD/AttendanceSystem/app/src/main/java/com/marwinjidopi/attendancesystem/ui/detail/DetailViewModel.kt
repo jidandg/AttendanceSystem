@@ -25,7 +25,7 @@ class DetailViewModel : ViewModel() {
 
     fun getNowClass(): ClassEntity {
         lateinit var data: ClassEntity
-        val entity = DataDummy.generateNowClassDummyData()
+        val entity = DataDummy.generateOngoingClassDummyData()
         for (entity in entity) {
             if (entity.id == dataId) {
                 data = entity

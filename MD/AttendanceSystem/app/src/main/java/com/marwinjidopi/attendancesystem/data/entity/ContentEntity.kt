@@ -1,7 +1,5 @@
 package com.marwinjidopi.attendancesystem.data.entity
 
-import java.util.*
-
 data class ContentEntity(
     var id: String,
     var className: String,
