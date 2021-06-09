@@ -94,6 +94,7 @@ class DetailActivity : AppCompatActivity() {
         binding.tvDetailClassName.text = data.className
         binding.tvDetailClassTeacher.text = data.classTeacherI + " | " + data.classTeacherII
         binding.tvDetailClassDate.text = data.classDate
+        globalData = data.classDate
         binding.tvDetailClassTime.text = data.classTime
         binding.tvDetailClassInfo.text = data.classInfo
     }
@@ -105,5 +106,6 @@ class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_CONTENT = "EXTRA_CONTENT"
+        var globalData = ""
     }
 }

@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.marwinjidopi.attendancesystem.data.AbsentForm
 import com.marwinjidopi.attendancesystem.databinding.ActivitySendDataBinding
+import com.marwinjidopi.attendancesystem.ui.detail.DetailActivity.Companion.globalData
 import com.marwinjidopi.attendancesystem.ui.login.LoginActivity
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -166,7 +167,7 @@ class SendDataActivity : AppCompatActivity() {
     private fun uploadImage(img: Bitmap, pictName: String) {
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.getReferenceFromUrl("gs://attendance-system-9f194.appspot.com")
-        val imagePath = "${pictName}.jpg"
+        val imagePath = "${pictName + globalData}.jpg"
         val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val imageRef = storageRef.child("imgDataAbsent/$userId/$imagePath")
         val byteArrayOutputStream = ByteArrayOutputStream()
