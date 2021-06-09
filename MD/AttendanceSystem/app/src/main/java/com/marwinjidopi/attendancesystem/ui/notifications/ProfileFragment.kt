@@ -2,7 +2,6 @@ package com.marwinjidopi.attendancesystem.ui.notifications
 
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,20 +10,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.marwinjidopi.attendancesystem.databinding.FragmentNotificationsBinding
+import com.google.firebase.storage.FirebaseStorage
+import com.marwinjidopi.attendancesystem.databinding.FragmentProfileBinding
 import com.marwinjidopi.attendancesystem.ui.registerlogin.LoginActivity
 
 
-class NotificationsFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
-    private var _binding: FragmentNotificationsBinding? = null
+    private lateinit var profileViewModel: ProfileViewModel
+    private var _binding: FragmentProfileBinding? = null
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
     private lateinit var colUsers: CollectionReference
@@ -38,10 +35,10 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        profileViewModel =
+            ViewModelProvider(this).get(ProfileViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         mAuth = FirebaseAuth.getInstance()
@@ -49,7 +46,17 @@ class NotificationsFragment : Fragment() {
         colUsers = database.collection("users")
         colUserdata = database.collection("userdata")
 
-        docRef = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        val storage = FirebaseStorage.getInstance()
+        val storageRef = storage.getReferenceFromUrl("gs://attendance-system-9f194.appspot.com")
+        val userId = mAuth.currentUser?.uid.toString()
+        val imagePath = "${userId}.jpg"
+        val imageRef = storageRef.child("img/$userId/$imagePath")
+
+        docRef = mAuth.currentUser?.uid.toString()
+
+        Glide.with(this)
+            .load(imageRef)
+            .into(binding.imgProfile)
 
         colUsers
             .document(docRef)
@@ -66,9 +73,6 @@ class NotificationsFragment : Fragment() {
             .document(docRef)
             .get()
             .addOnSuccessListener { document ->
-                Glide.with(this)
-                    .load(document.data?.getValue("img"))
-                    .into(binding.imgProfile)
                 binding.tvNamePreview.text = document.data?.getValue("name").toString()
                 binding.tvNIMPreview.text = document.data?.getValue("nim").toString()
                 binding.tvSemesterPreview.text = document.data?.getValue("semester").toString()
@@ -95,8 +99,7 @@ class NotificationsFragment : Fragment() {
         _binding = null
     }
 
-    fun logOut()
-    {
+    private fun logOut() {
         mAuth.signOut()
         val intent = Intent(activity, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
