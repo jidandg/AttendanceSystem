@@ -58,7 +58,7 @@ class DetailActivity : AppCompatActivity() {
         val data = viewModel.getNextClass()
         val homeAdapter = DetailAdapter()
         homeAdapter.setData(data)
-        with(binding.rvLastClass){
+        with(binding.rvNextClass){
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = homeAdapter
@@ -70,7 +70,7 @@ class DetailActivity : AppCompatActivity() {
         val data = viewModel.getNowClass()
         val homeAdapter = DetailAdapter()
         homeAdapter.setData(data)
-        with(binding.rvLastClass){
+        with(binding.rvOnGoingClass){
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = homeAdapter
