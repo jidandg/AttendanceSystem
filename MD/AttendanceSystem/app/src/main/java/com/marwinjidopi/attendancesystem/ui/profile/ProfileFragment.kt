@@ -1,4 +1,4 @@
-package com.marwinjidopi.attendancesystem.ui.notifications
+package com.marwinjidopi.attendancesystem.ui.profile
 
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -14,7 +14,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.marwinjidopi.attendancesystem.databinding.FragmentProfileBinding
-import com.marwinjidopi.attendancesystem.ui.registerlogin.LoginActivity
+import com.marwinjidopi.attendancesystem.ui.login.LoginActivity
 
 
 class ProfileFragment : Fragment() {

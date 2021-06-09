@@ -1,13 +1,15 @@
-package com.marwinjidopi.attendancesystem.ui.registerlogin
+package com.marwinjidopi.attendancesystem.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.marwinjidopi.attendancesystem.ui.MainActivity
 import com.marwinjidopi.attendancesystem.databinding.ActivityLoginBinding
+import com.marwinjidopi.attendancesystem.ui.MainActivity
+import com.marwinjidopi.attendancesystem.ui.forgot_password.ForgotPasswordActivity
+import com.marwinjidopi.attendancesystem.ui.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
 

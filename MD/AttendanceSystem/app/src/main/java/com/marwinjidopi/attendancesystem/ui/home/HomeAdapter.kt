@@ -4,6 +4,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.avatarfirst.avatargenlib.AvatarConstants
+import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.marwinjidopi.attendancesystem.data.entity.ContentEntity
 import com.marwinjidopi.attendancesystem.databinding.ItemLayoutBinding
 import com.marwinjidopi.attendancesystem.ui.detail.DetailActivity
@@ -21,6 +23,14 @@ class HomeAdapter : RecyclerView.Adapter<Holder>() {
     inner class Holder(private val bind: ItemLayoutBinding) : RecyclerView.ViewHolder(bind.root) {
         fun bind(data: ContentEntity) {
             with(bind) {
+                imgClass.setImageDrawable(
+                    AvatarGenerator.avatarImage(
+                        itemView.context,
+                        200,
+                        AvatarConstants.CIRCLE,
+                        data.className
+                    )
+                )
                 tvClassName.text = data.className
                 tvPengajar.text = data.classTeacherI + " | " + data.classTeacherII
                 tvClock.text = data.classTime

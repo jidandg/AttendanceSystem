@@ -1,4 +1,4 @@
-package com.marwinjidopi.attendancesystem.ui
+package com.marwinjidopi.attendancesystem.ui.splash
 
 import android.content.Intent
 import android.os.Build
@@ -8,12 +8,12 @@ import android.os.Handler
 import android.view.WindowInsets
 import android.view.WindowManager
 import com.marwinjidopi.attendancesystem.R
-import com.marwinjidopi.attendancesystem.ui.registerlogin.LoginActivity
+import com.marwinjidopi.attendancesystem.ui.login.LoginActivity
 
-class SplashScreenActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        setContentView(R.layout.activity_splash)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())

@@ -1,4 +1,4 @@
-package com.marwinjidopi.attendancesystem.ui.registerlogin
+package com.marwinjidopi.attendancesystem.ui.register
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.marwinjidopi.attendancesystem.data.User
 import com.marwinjidopi.attendancesystem.databinding.ActivityRegisterBinding
+import com.marwinjidopi.attendancesystem.ui.login.LoginActivity
+import com.marwinjidopi.attendancesystem.ui.register_form.RegisterFormActivity
 
 class RegisterActivity : AppCompatActivity() {
 

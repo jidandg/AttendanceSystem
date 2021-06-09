@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.registerlogin.LoginActivity">
+    tools:context=".ui.login.LoginActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -84,7 +84,6 @@
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="@color/blue"
                 android:text="@string/login"
                 android:textColor="#FFF"
                 app:cornerRadius="50dp"
@@ -98,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/don_t_have_account_register_here"
-                android:textColor="@color/blue"
+                android:textColor="@color/blue_700"
                 app:layout_constraintEnd_toEndOf="@+id/btnLogin"
                 app:layout_constraintStart_toStartOf="@+id/btnLogin"
                 app:layout_constraintTop_toBottomOf="@+id/btnLogin" />

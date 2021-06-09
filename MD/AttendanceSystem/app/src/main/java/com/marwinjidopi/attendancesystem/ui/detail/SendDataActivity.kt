@@ -20,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.marwinjidopi.attendancesystem.data.AbsentForm
 import com.marwinjidopi.attendancesystem.databinding.ActivitySendDataBinding
-import com.marwinjidopi.attendancesystem.ui.registerlogin.LoginActivity
+import com.marwinjidopi.attendancesystem.ui.login.LoginActivity
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException

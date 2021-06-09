@@ -1,25 +1,25 @@
-package com.marwinjidopi.attendancesystem.ui.registerlogin
+package com.marwinjidopi.attendancesystem.ui.register_form
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.marwinjidopi.attendancesystem.data.UserForm
 import com.marwinjidopi.attendancesystem.databinding.ActivityRegisterFormBinding
+import com.marwinjidopi.attendancesystem.ui.login.LoginActivity
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
@@ -84,7 +84,7 @@ class RegisterFormActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
                 else -> {
-                    val user = UserForm(bitmap, name, nim, semester, faculty, major)
+                    val user = UserForm(name, nim, semester, faculty, major)
                     uploadImage(bitmap, FirebaseAuth.getInstance().currentUser?.uid.toString())
                     database.collection("userdata")
                         .document(FirebaseAuth.getInstance().currentUser?.uid.toString())
@@ -113,7 +113,7 @@ class RegisterFormActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = getRotatedImage(photoURI)
             binding.imgCamera.setImageBitmap(imageBitmap)
             bitmap = imageBitmap
