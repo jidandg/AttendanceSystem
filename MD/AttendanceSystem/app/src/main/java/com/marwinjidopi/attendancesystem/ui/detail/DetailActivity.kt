@@ -5,8 +5,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.marwinjidopi.attendancesystem.data.entity.ClassEntity
 import com.marwinjidopi.attendancesystem.data.entity.ContentEntity
 import com.marwinjidopi.attendancesystem.databinding.ActivityDetailBinding
 
@@ -15,6 +17,8 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
+    private var data: ArrayList<ClassEntity> = ArrayList()
+    private lateinit var detailAdapter: DetailAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,9 +43,49 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
+        recyclerLastClass()
+        recyclerNowClass()
+        recyclerNextClass()
+
         binding.btnAbsentClass.setOnClickListener {
             val intent = Intent(this, SendDataActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun recyclerNextClass() {
+        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailViewModel::class.java]
+        val data = viewModel.getNextClass()
+        val homeAdapter = DetailAdapter()
+        homeAdapter.setData(data)
+        with(binding.rvLastClass){
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = homeAdapter
+        }
+    }
+
+    private fun recyclerNowClass() {
+        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailViewModel::class.java]
+        val data = viewModel.getNowClass()
+        val homeAdapter = DetailAdapter()
+        homeAdapter.setData(data)
+        with(binding.rvLastClass){
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = homeAdapter
+        }
+    }
+
+    private fun recyclerLastClass() {
+        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailViewModel::class.java]
+        val data = viewModel.getLastClass()
+        val homeAdapter = DetailAdapter()
+        homeAdapter.setData(data)
+        with(binding.rvLastClass){
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = homeAdapter
         }
     }
 
