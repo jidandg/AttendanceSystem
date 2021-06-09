@@ -18,11 +18,6 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
-    private val IMAGE_CAPTURE = 1
-    lateinit var imageFilePath: String
-    lateinit var bitmap: Bitmap
-    private var photoFile: File? = null
-    private lateinit var photoURI: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +51,7 @@ class DetailActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun populateContent(data: ContentEntity) {
         binding.tvDetailClassName.text = data.className
-        binding.tvDetailClassTeacher.text = data.classTeacherI + data.classTeacherII
+        binding.tvDetailClassTeacher.text = data.classTeacherI + " | " + data.classTeacherII
         binding.tvDetailClassDate.text = data.classDate
         binding.tvDetailClassTime.text = data.classTime
         binding.tvDetailClassInfo.text = data.classInfo

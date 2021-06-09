@@ -11,7 +11,6 @@ import com.marwinjidopi.attendancesystem.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
