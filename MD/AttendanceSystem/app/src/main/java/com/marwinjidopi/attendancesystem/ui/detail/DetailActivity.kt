@@ -2,16 +2,13 @@ package com.marwinjidopi.attendancesystem.ui.detail
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Bitmap
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.marwinjidopi.attendancesystem.data.ContentEntity
+import com.marwinjidopi.attendancesystem.data.entity.ContentEntity
 import com.marwinjidopi.attendancesystem.databinding.ActivityDetailBinding
-import java.io.File
 
 class DetailActivity : AppCompatActivity() {
 
@@ -38,7 +35,7 @@ class DetailActivity : AppCompatActivity() {
             val id = extra.getString(EXTRA_CONTENT)
             if (id != null) {
                 viewModel.setSelectedData(id)
-                populateContent(viewModel.getData())
+                populateData(viewModel.getData())
             }
         }
 
@@ -49,7 +46,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun populateContent(data: ContentEntity) {
+    private fun populateData(data: ContentEntity) {
         binding.tvDetailClassName.text = data.className
         binding.tvDetailClassTeacher.text = data.classTeacherI + " | " + data.classTeacherII
         binding.tvDetailClassDate.text = data.classDate

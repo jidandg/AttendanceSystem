@@ -4,7 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.marwinjidopi.attendancesystem.data.ContentEntity
+import com.marwinjidopi.attendancesystem.data.entity.ContentEntity
 import com.marwinjidopi.attendancesystem.databinding.ItemLayoutBinding
 import com.marwinjidopi.attendancesystem.ui.detail.DetailActivity
 import com.marwinjidopi.attendancesystem.ui.home.HomeAdapter.*

@@ -1,6 +1,7 @@
 package com.marwinjidopi.attendancesystem.utils
 
-import com.marwinjidopi.attendancesystem.data.ContentEntity
+import com.marwinjidopi.attendancesystem.data.entity.ClassEntity
+import com.marwinjidopi.attendancesystem.data.entity.ContentEntity
 
 object DataDummy {
     fun generateDummyData(): ArrayList<ContentEntity> {
@@ -40,5 +41,98 @@ object DataDummy {
             )
         )
         return classData
+    }
+    fun generateLastClassDummyData(): ArrayList<ClassEntity>{
+        val classInfo = ArrayList<ClassEntity>()
+        classInfo.add(
+            ClassEntity(
+                "1",
+                "Pemodelan Sistem Multimedia",
+                "https://emas.ui.ac.id/course/view.php?id=12874",
+                "Tuesday, 1 June 2021",
+                "10.00"
+            )
+        )
+        classInfo.add(
+            ClassEntity(
+                "2",
+                "Pemrograman Berorientasi Objek",
+                "https://emas.ui.ac.id/course/view.php?id=13248",
+                "Thursday, 3 June 2021",
+                "07.00"
+            )
+        )
+        classInfo.add(
+            ClassEntity(
+                "3",
+                "Rekayasa Perangkat Lunak",
+                "https://emas.ui.ac.id/course/view.php?id=9693",
+                "Wednesday, 2 June 2021",
+                "13.00",
+            )
+        )
+        return classInfo
+    }
+    fun generateNowClassDummyData(): ArrayList<ClassEntity>{
+        val classInfo = ArrayList<ClassEntity>()
+        classInfo.add(
+            ClassEntity(
+                "1",
+                "Pemodelan Sistem Multimedia",
+                "https://emas.ui.ac.id/course/view.php?id=12874",
+                "Tuesday, 8 June 2021",
+                "10.00"
+            )
+        )
+        classInfo.add(
+            ClassEntity(
+                "2",
+                "Pemrograman Berorientasi Objek",
+                "https://emas.ui.ac.id/course/view.php?id=13248",
+                "Thursday, 10 June 2021",
+                "07.00"
+            )
+        )
+        classInfo.add(
+            ClassEntity(
+                "3",
+                "Rekayasa Perangkat Lunak",
+                "https://emas.ui.ac.id/course/view.php?id=9693",
+                "Wednesday, 9 June 2021",
+                "13.00",
+            )
+        )
+        return classInfo
+    }
+    fun generateNextClassDummyData(): ArrayList<ClassEntity>{
+        val classInfo = ArrayList<ClassEntity>()
+        classInfo.add(
+            ClassEntity(
+                "1",
+                "Pemodelan Sistem Multimedia",
+                "https://emas.ui.ac.id/course/view.php?id=12874",
+                "Tuesday, 15 June 2021",
+                "10.00"
+            )
+        )
+        classInfo.add(
+            ClassEntity(
+                "2",
+                "Pemrograman Berorientasi Objek",
+                "https://emas.ui.ac.id/course/view.php?id=13248",
+                "Thursday, 17 June 2021",
+                "07.00"
+            )
+        )
+        classInfo.add(
+            ClassEntity(
+                "3",
+                "Rekayasa Perangkat Lunak",
+                "https://emas.ui.ac.id/course/view.php?id=9693",
+                "Wednesday, 16 June 2021",
+                "13.00",
+            )
+        )
+        return classInfo
     }
 }

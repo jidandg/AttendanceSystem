@@ -1,4 +1,4 @@
-package com.marwinjidopi.attendancesystem.data
+package com.marwinjidopi.attendancesystem.data.entity
 
 import java.util.*
 
@@ -10,5 +10,4 @@ data class ContentEntity(
     var classDate: String,
     var classTime: String,
     var classInfo: String
-
 )
