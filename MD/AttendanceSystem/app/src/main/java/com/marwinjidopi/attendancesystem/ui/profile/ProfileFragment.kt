@@ -8,13 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.marwinjidopi.attendancesystem.databinding.FragmentProfileBinding
 import com.marwinjidopi.attendancesystem.ui.login.LoginActivity
+import com.marwinjidopi.attendancesystem.utils.MyAppGlideModule
 
 
 class ProfileFragment : Fragment() {
@@ -49,7 +49,7 @@ class ProfileFragment : Fragment() {
 
         docRef = mAuth.currentUser?.uid.toString()
 
-        Glide.with(this)
+        GlideApp.with(context)
             .load(storageRef)
             .into(binding.imgProfile)
 
