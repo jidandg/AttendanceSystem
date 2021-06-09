@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.marwinjidopi.attendancesystem.databinding.FragmentProfileBinding
 import com.marwinjidopi.attendancesystem.ui.login.LoginActivity
+import com.marwinjidopi.attendancesystem.utils.GlideApp
 import com.marwinjidopi.attendancesystem.utils.MyAppGlideModule
 
 
@@ -49,9 +50,11 @@ class ProfileFragment : Fragment() {
 
         docRef = mAuth.currentUser?.uid.toString()
 
-        GlideApp.with(context)
-            .load(storageRef)
-            .into(binding.imgProfile)
+        context?.let {
+            GlideApp.with(it)
+                .load(storageRef)
+                .into(binding.imgProfile)
+        }
 
         colUsers
             .document(docRef)
