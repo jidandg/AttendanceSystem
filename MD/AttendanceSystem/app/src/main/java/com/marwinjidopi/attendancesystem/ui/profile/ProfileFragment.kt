@@ -43,15 +43,14 @@ class ProfileFragment : Fragment() {
         colUserdata = database.collection("userdata")
 
         val storage = FirebaseStorage.getInstance()
-        val storageRef = storage.getReferenceFromUrl("gs://attendance-system-9f194.appspot.com")
         val userId = mAuth.currentUser?.uid.toString()
         val imagePath = "${userId}.jpg"
-        val imageRef = storageRef.child("img/$userId/$imagePath")
+        val storageRef = storage.getReferenceFromUrl("gs://attendance-system-9f194.appspot.com/img/$userId/$imagePath")
 
         docRef = mAuth.currentUser?.uid.toString()
 
         Glide.with(this)
-            .load(imageRef)
+            .load(storageRef)
             .into(binding.imgProfile)
 
         colUsers
